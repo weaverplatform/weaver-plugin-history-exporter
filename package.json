@@ -1,7 +1,7 @@
 {
   "name": "weaver-plugin-history-exporter",
   "version": "1.0.0",
-  "description": "weaver Server changes Reporting plugin to export as xlsx",
+  "description": "weaver server changes Reporting plugin to export as xlsx",
   "main": "lib/index.js",
   "scripts": {
     "prepublish": "coffee -o lib -c src"
