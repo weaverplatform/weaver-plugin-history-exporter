@@ -8,9 +8,13 @@ You can run it with docker:
 
 ## Install
 Clone this repository on the root plugins folder in weaver-server.
+
 `$ npm install`
+
 `$ npm run prepublish`
+
 To copy the config settings to weaver-server, run on weaver main folder:
+
 `$ npm run copyPluginsConfig`
 
 ## Use
