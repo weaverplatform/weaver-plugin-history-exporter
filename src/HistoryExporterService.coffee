@@ -2,7 +2,6 @@ request     = require('request')
 fs          = require('fs')
 logger      = require('logger')
 config      = require('config')
-express     = require('express')
 fileService = require('FileService')
 Promise     = require('bluebird')
 tracker     = require('Tracker')
@@ -24,6 +23,7 @@ class HistoryExporterService
     try
       promises = []
       request.payload = {}
+      # request.payload.limit = 100 # just to not break everithing
       tracker.getHistoryFor(request)
       .then((rows) =>
         promises.push(@extractHeaders(rows[0]))
