@@ -8,7 +8,8 @@ describe 'BB reporting pluging testing', ->
 
   it 'should list available plugins', ->
     Weaver.Plugin.list().then((plugins) ->
-      assert.equal(plugins.length, 4)
+      plugin = i for i in plugins when i._name is 'weaver-plugin-history-exporter'
+      expect(plugin).to.not.be.undefined
     )
 
   it 'should get a weaver-plugin-history-exporter plugin', ->
