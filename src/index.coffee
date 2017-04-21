@@ -2,7 +2,7 @@ HistoryExporterService = require('./HistoryExporterService')
 
 module.exports = (bus) ->
 
-  bus.private('reportExcelDumpAll').require('fileName','projectId').on((req, fileName, projectId) ->
-    historyExporterService = new HistoryExporterService(fileName, projectId)
+  bus.private('reportExcelDumpAll').retrieve('tracker').require('fileName','projectId').on((req, tracker, fileName, projectId) ->
+    historyExporterService = new HistoryExporterService(fileName, projectId, tracker)
     historyExporterService.excelDumpAll()
   )

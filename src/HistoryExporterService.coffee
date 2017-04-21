@@ -4,27 +4,24 @@ logger      = require('logger')
 config      = require('config')
 fileService = require('FileService')
 Promise     = require('bluebird')
-tracker     = require('Tracker')
 
 
 class HistoryExporterService
 
-  constructor: (fileName,projectId) ->
-    @fileName = fileName
-    @projectId = projectId
+  constructor: (@fileName, @projectId, @tracker) ->
     @excelMicroserviceEndpoint = config.get('weaver-plugin-history-exporter.services.excelMicroservice')
     @sheet = {0:{0:{}}}
     @dir = 'uploads'
     logger.code.debug("#{config.get('weaver-plugin-history-exporter.services.excelMicroservice')}")
-    logger.code.debug(fileName)
-    logger.code.debug(projectId)
+    logger.code.debug(@fileName)
+    logger.code.debug(@projectId)
 
   excelDumpAll: ->
     try
       promises = []
       request.payload = {}
       # request.payload.limit = 100 # just to not break everithing
-      tracker.getHistoryFor(request)
+      @tracker.getHistoryFor(request)
       .then((rows) =>
         promises.push(@extractHeaders(rows[0]))
         promises.push(@extractData(rows))
