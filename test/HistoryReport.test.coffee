@@ -2,24 +2,25 @@
  To run this test copy it to the test folder in the weaver-sdk
 ###
 
-require("./test-suite")
+Weaver = require("./test-suite")
+WeaverClass = Weaver.getClass()
 
 describe 'BB reporting pluging testing', ->
 
   it 'should list available plugins', ->
-    Weaver.Plugin.list().then((plugins) ->
+    WeaverClass.Plugin.list().then((plugins) ->
       plugin = i for i in plugins when i._name is 'weaver-plugin-history-exporter'
       expect(plugin).to.not.be.undefined
     )
 
   it 'should get a weaver-plugin-history-exporter plugin', ->
-    Weaver.Plugin.load('weaver-plugin-history-exporter').then((plugin) ->
+    WeaverClass.Plugin.load('weaver-plugin-history-exporter').then((plugin) ->
       assert.equal(plugin.getPluginName(), 'weaver-plugin-history-exporter')
     )
 
   it 'should do something for the history reporting generator', ->
     this.timeout(600000)
-    Weaver.Plugin.load('weaver-plugin-history-exporter').then((historyReport) ->
+    WeaverClass.Plugin.load('weaver-plugin-history-exporter').then((historyReport) ->
 
       projectId = Weaver.currentProject().projectId
 
